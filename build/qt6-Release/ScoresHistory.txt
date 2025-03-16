@@ -1,9 +1,0 @@
-CGH0S7  Normal  500
-Unkown  Lunatic  100
-Unkown  Normal  0
-Unkown  Normal  4400
-Unkown  Normal  0
-Unkown  Normal  0
-Unkown  Normal  0
-Unkown  Normal  0
-Unkown  Normal  0
