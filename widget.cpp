@@ -10,7 +10,8 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
   QString basePath = QCoreApplication::applicationDirPath();
   setWindowTitle("Qtetris");
   setWindowIcon(QIcon(basePath + "/resources/images/logo.png"));
-  //  效果不佳  this->setStyleSheet("background-image:
+  //    背景效果不佳
+  //    this->setStyleSheet("background-image:
   //    url(/home/gh0s7/project/qt6/Qtetris/resources/images/78355322_p0.jpg);");
   mediaPlayer = new QMediaPlayer(this);
   QAudioOutput *audioOutput = new QAudioOutput;
@@ -19,18 +20,19 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
   // mediaPlayer->setMedia(QUrl::fromLocalFile("/home/gh0s7/project/qt6/Qtetris/resources/audio/flower.ogg"));
   // auto *playlist = new QMediaPlaylist();
   // bgm都是自己用开源编曲软件lmms编曲的，原曲来自上海爱莉丝幻乐团qwq
+  // 路径上方为原曲名
   QStringList audioFiles = {// 广重36号
-                            basePath + "/resources/audio/neoexpress.wav",
+                            basePath + "/resources/audio/neoexpress.ogg",
                             // 宇宙露天咖啡座
                             basePath + "/resources/audio/CafeTerrace.ogg",
                             // 花如幻想一般
-                            basePath + "/resources/audio/flower.ogg",
-                            // 寻找日本各处之神秘
-                            basePath + "/resources/audio/mistery.wav",
+                           basePath + "/resources/audio/flower.ogg",
+                            // 收集日本各处的不可思议
+                            basePath + "/resources/audio/mistery.ogg",
                             // 无间之钟
-                            basePath + "/resources/audio/clock.wav",
+                            basePath + "/resources/audio/clock.ogg",
                             // 幻想净琉璃
-                            basePath + "/resources/audio/glass.wav"};
+                            basePath + "/resources/audio/glass.ogg"};
   currentIndex = 0;
   mediaPlayer->setSource(QUrl::fromLocalFile(audioFiles[currentIndex]));
   QObject::connect(
@@ -42,25 +44,6 @@ Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget) {
         }
       });
   mediaPlayer->play();
-  /* 原qt5写法，相关接口已废弃
-    QString audioPath = basePath + "/resources/audio/neoexpress.wav";
-    playlist->addMedia(QUrl::fromLocalFile(audioPath));
-    audioPath = basePath + "/resources/audio/CafeTerrace.ogg";
-    playlist->addMedia(QUrl::fromLocalFile(audioPath));
-    audioPath = basePath + "/resources/audio/flower.ogg";
-    playlist->addMedia(QUrl::fromLocalFile(audioPath));
-    audioPath = basePath + "/resources/audio/mistery.wav";
-    playlist->addMedia(QUrl::fromLocalFile(audioPath));
-    audioPath = basePath + "/resources/audio/clock.wav";
-    playlist->addMedia(QUrl::fromLocalFile(audioPath));
-    audioPath = basePath + "/resources/audio/glass.wav";
-    playlist->addMedia(QUrl::fromLocalFile(audioPath));
-
-    playlist->setPlaybackMode(QMediaPlaylist::Loop);
-    mediaPlayer->setVolume(50);
-    mediaPlayer->setPlaylist(playlist);
-    mediaPlayer->play();
-  */
   m_nextBlockState = (QRandomGenerator::global()->bounded(10)) * 4;
   ui->tableWidget_next->updateBlock(m_nextBlockState);
   connect(ui->pushButton_music, &QPushButton::clicked, this,
